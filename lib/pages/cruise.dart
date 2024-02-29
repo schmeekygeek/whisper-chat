@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../classes/client.dart';
+import '../util.dart';
 
 class Cruise extends StatefulWidget {
   const Cruise({
@@ -47,6 +48,13 @@ class _CruiseState extends State<Cruise> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
+                if (snapshot.hasData && isServerMessage(snapshot.data)) {
+                  late Info info;
+                  late Client client;
+                  (info, client) = parseServerMessage(snapshot.data);
+                  print(info);
+                  print(client.username);
+                }
                 return Text(snapshot.hasData ? '${snapshot.data}' : '');
               },
             )
