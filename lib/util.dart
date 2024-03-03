@@ -1,31 +1,18 @@
 import 'dart:convert';
 
-import 'classes/client.dart';
+import 'classes/message.dart';
 
-enum Info { matched, disconnected }
+enum MessageType { bind, matched, disconnected, client }
 
-bool isServerMessage(String message) {
-  return message.startsWith('msg:');
+bool isServerMessage(String data) {
+  Message message = Message.fromJson(jsonDecode(data));
+  return message.type != MessageType.client.toString();
 }
 
-(Info, Client) parseServerMessage(String message) {
-  int from = 0;
+parseServerMessage(String data) {
+  Message message = Message.fromJson(jsonDecode(data));
+}
 
-  for (int i = 0; i < message.length; i++) {
-    if (message[i] == ' ') {
-      from = i;
-      break;
-    }
-  }
-
-  // msg:MATCHED sntoaehu
-  Client client = Client.fromJson(jsonDecode(message.substring(from, message.length)));
-  late Info info;
-  switch (message.substring(4, from).toLowerCase()) {
-    case 'matched':
-      info = Info.matched;
-    case 'disconnected':
-      info = Info.disconnected;
-  }
-  return (info, client);
+Message parseClientMessage(String message){
+  return Message.fromJson(jsonDecode(message));
 }

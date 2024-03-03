@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-import '../classes/client.dart';
+import '../classes/message.dart';
 import '../util.dart';
 
 class Cruise extends StatefulWidget {
   const Cruise({
-    super.key, required this.client
+    super.key, required this.message
   });
 
-  final Client client;
+  final Message message;
 
   @override
   State<Cruise> createState() => _CruiseState();
@@ -23,7 +23,7 @@ class _CruiseState extends State<Cruise> {
 
   @override
   void initState() {
-    _channel.sink.add('msg:BIND ${widget.client.toJson().toString()}');
+    _channel.sink.add(widget.message.toJson().toString());
     super.initState();
   }
 
@@ -48,16 +48,18 @@ class _CruiseState extends State<Cruise> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
-                if (snapshot.hasData && isServerMessage(snapshot.data)) {
-                  late Info info;
-                  late Client client;
-                  (info, client) = parseServerMessage(snapshot.data);
-                  print(info);
-                  print(client.username);
+                if (snapshot.hasData) {
+                  
+                  if (isServerMessage(snapshot.data)) {
+                    parseServerMessage(snapshot.data);
+                  }
+                  else {
+                    parseServerMessage(snapshot.data);
+                  }
                 }
                 return Text(snapshot.hasData ? '${snapshot.data}' : '');
               },
-            )
+            ),
           ],
         ),
       ),
@@ -65,7 +67,7 @@ class _CruiseState extends State<Cruise> {
         onPressed: _sendMessage,
         tooltip: 'Send message',
         child: const Icon(Icons.send),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 

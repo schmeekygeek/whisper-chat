@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:whisper_chat/classes/message.dart';
 
 class MessageProvider with ChangeNotifier {
 
-  String _input = '';
+  final List<Message> _messages = [];
 
-  String get getInput => _input;
+  List<Message> get getMessages => _messages;
 
-  set setInput(String input) {
-    _input = input;
-    notifyListeners();
+  void addMessage(Message message) {
+    _messages.add(message);
   }
 }
