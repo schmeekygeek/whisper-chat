@@ -2,18 +2,14 @@ import 'dart:convert';
 
 import 'classes/message.dart';
 
-enum MessageType { bind, matched, disconnected, client }
+  const matchedmsg = 'matched';
+  const bindmsg = 'bind';
+  const dscnctmsg = 'disconnected';
+  const clntmsg = 'client';
 
-bool isServerMessage(String data) {
+parseMessage(String data) {
   Message message = Message.fromJson(jsonDecode(data));
-  return message.type != MessageType.client.toString();
-}
-
-(String, String) parseServerMessage(String data) {
-  // TODO: parse json body
-  Message message = Message.fromJson(jsonDecode(data));
-}
-
-Message parseClientMessage(String message){
-  return Message.fromJson(jsonDecode(message));
+  switch (message.type) {
+    case clntmsg:
+  }
 }

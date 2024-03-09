@@ -50,7 +50,7 @@ class _CruiseState extends State<Cruise> {
               stream: _channel.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  parseServerMessage(snapshot.data);
+                  parseMessage(snapshot.data);
 
                 }
                 return const ChatList();
