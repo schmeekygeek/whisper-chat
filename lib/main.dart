@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/providers/message_provider.dart';
 
+import 'providers/message_provider.dart';
 import 'classes/client.dart';
 import 'classes/location.dart';
 import 'classes/message.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/providers/message_provider.dart';
-import 'package:whisper_chat/shared/chat_chip.dart';
 
+import '../providers/message_provider.dart';
+import 'chat_chip.dart';
 import '../classes/message.dart';
 
 class ChatList extends StatefulWidget {
