@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:whisper_chat/shared/chat_list.dart';
 
 import '../classes/message.dart';
 import '../util.dart';
@@ -49,15 +50,10 @@ class _CruiseState extends State<Cruise> {
               stream: _channel.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  
-                  if (isServerMessage(snapshot.data)) {
-                    parseServerMessage(snapshot.data);
-                  }
-                  else {
-                    parseServerMessage(snapshot.data);
-                  }
+                  parseServerMessage(snapshot.data);
+
                 }
-                return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                return const ChatList();
               },
             ),
           ],

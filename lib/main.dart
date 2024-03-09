@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:whisper_chat/providers/message_provider.dart';
 
 import 'classes/client.dart';
 import 'classes/location.dart';
@@ -7,12 +9,19 @@ import 'pages/cruise.dart';
 import 'util.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MessageProvider()),
+      ],
+      child: const WhisperChat(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class WhisperChat extends StatelessWidget {
 
-  const MyApp({super.key});
+  const WhisperChat({super.key});
   static Message message = Message(
     type: MessageType.bind.name,
     from: Client(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whisper_chat/classes/message.dart';
+import '../classes/message.dart';
 
 class MessageProvider with ChangeNotifier {
 
@@ -9,5 +9,6 @@ class MessageProvider with ChangeNotifier {
 
   void addMessage(Message message) {
     _messages.add(message);
+    notifyListeners();
   }
 }

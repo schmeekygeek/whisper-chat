@@ -9,7 +9,8 @@ bool isServerMessage(String data) {
   return message.type != MessageType.client.toString();
 }
 
-parseServerMessage(String data) {
+(String, String) parseServerMessage(String data) {
+  // TODO: parse json body
   Message message = Message.fromJson(jsonDecode(data));
 }
 
