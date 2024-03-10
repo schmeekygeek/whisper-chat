@@ -9,6 +9,8 @@ class MessageProvider with ChangeNotifier {
 
   void addMessage(Message message) {
     _messages.add(message);
-    notifyListeners();
+    Future.delayed(Duration(seconds: 1), () {
+      notifyListeners();
+    });
   }
 }

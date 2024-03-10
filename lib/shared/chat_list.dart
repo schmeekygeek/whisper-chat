@@ -19,11 +19,14 @@ class _ChatListState extends State<ChatList> {
     return Container(
       height: 540,
       color: Colors.grey,
-      child: ListView(
-        children: [
-          for (Message message in messages)
-          ChatChip(text: message.body, from: message.from.username)
-        ],
+      child: ListView.builder(
+        itemCount: messages.length,
+        itemBuilder: (
+          BuildContext context,
+          int index
+        ) {
+          return ChatChip(text: messages[index].body, from: messages[index].from.username);
+        }
       ),
     );
   }
