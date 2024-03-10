@@ -23,7 +23,7 @@ class WhisperChat extends StatelessWidget {
 
   const WhisperChat({super.key});
   static Message message = Message(
-    type: MessageType.bind.name,
+    type: bindmsg,
     from: Client(
       range: 0,
       username: 'flut',

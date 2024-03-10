@@ -18,6 +18,7 @@ class Cruise extends StatefulWidget {
 
 class _CruiseState extends State<Cruise> {
   final TextEditingController _controller = TextEditingController();
+
   final _channel = WebSocketChannel.connect(
     Uri.parse('ws://localhost:8080'),
   );
@@ -49,9 +50,8 @@ class _CruiseState extends State<Cruise> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  parseMessage(snapshot.data);
-
+                if (snapshot.hasData && snapshot.connectionState == ConnectionState.active) {
+                  parseMessage(context, snapshot.data);
                 }
                 return const ChatList();
               },
@@ -60,17 +60,11 @@ class _CruiseState extends State<Cruise> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _sendMessage,
+        onPressed: () {},
         tooltip: 'Send message',
         child: const Icon(Icons.send),
       ),
     );
-  }
-
-  void _sendMessage() {
-    if (_controller.text.isNotEmpty) {
-      _channel.sink.add(_controller.text);
-    }
   }
 
   @override

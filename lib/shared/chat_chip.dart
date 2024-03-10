@@ -7,12 +7,15 @@ class ChatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(from),
-        Text(text),
-        const Divider(),
-      ],
+    return SizedBox(
+      height: 90,
+      child: Column(
+        children: [
+          Text(from),
+          Text(text),
+          const Divider(),
+        ],
+      ),
     );
   }
 }
