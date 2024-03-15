@@ -16,9 +16,7 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     List<Message> messages = context.watch<MessageProvider>().getMessages;
-    return Container(
-      height: 540,
-      color: Colors.grey,
+    return Expanded(
       child: ListView.builder(
         itemCount: messages.length,
         itemBuilder: (
