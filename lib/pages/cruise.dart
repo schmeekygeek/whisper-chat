@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:whisper_chat/providers/message_provider.dart';
 import 'package:whisper_chat/shared/chat_list.dart';
+import 'package:whisper_chat/shared/chat_textbox.dart';
 
 import '../classes/message.dart';
 import '../util.dart';
@@ -26,6 +29,7 @@ class _CruiseState extends State<Cruise> {
   @override
   void initState() {
     _channel.sink.add(widget.message.toJson().toString());
+    context.read<MessageProvider>().setSelfUsername(widget.message.from.username);
     super.initState();
   }
 
@@ -40,13 +44,6 @@ class _CruiseState extends State<Cruise> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Form(
-              child: TextFormField(
-                controller: _controller,
-                decoration: const InputDecoration(labelText: 'Send a message'),
-              ),
-            ),
-            const SizedBox(height: 24),
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
@@ -56,13 +53,9 @@ class _CruiseState extends State<Cruise> {
                 return const ChatList();
               },
             ),
+            const ChatTextBox(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Send message',
-        child: const Icon(Icons.send),
       ),
     );
   }
