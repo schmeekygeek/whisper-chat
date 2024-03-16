@@ -6,7 +6,7 @@ import 'package:whisper_chat/providers/message_provider.dart';
 
 import 'classes/message.dart';
 
-const matchedmsg = 'matched';
+const cnnctmsg = 'connected';
 const bindmsg = 'bind';
 const dscnctmsg = 'disconnected';
 const clntmsg = 'client';

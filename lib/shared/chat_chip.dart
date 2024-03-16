@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:whisper_chat/providers/message_provider.dart';
 
 import '../classes/message.dart';
+import '../util.dart';
 
 class ChatChip extends StatelessWidget {
   final Message message;
@@ -12,18 +13,11 @@ class ChatChip extends StatelessWidget {
   Widget build(BuildContext context) {
 
     bool isSelf = context.read<MessageProvider>().getSelfUsername == message.from.username;
-    print(message.type);
     
-    if (message.type == 'matched' || message.type == 'disconnected') {
+    if (message.type == cnnctmsg || message.type == dscnctmsg ) {
       return Center(
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(5))
-          ),
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 30 / 100,
-          ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Text('${message.from.username} ${message.type}'),
         ),
       );
