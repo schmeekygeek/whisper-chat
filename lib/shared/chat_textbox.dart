@@ -1,37 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class ChatTextBox extends StatelessWidget {
-  const ChatTextBox({super.key});
+  const ChatTextBox({super.key, required this.channel});
+
+  final WebSocketChannel channel;
+
+  static final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
         border: Border.all(
-          color: Colors.black
+          color: Colors.black,
         ),
+        borderRadius: BorderRadius.circular(10),
       ),
-      height: 50,
-      child: const Row(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(
+            width: 10,
+          ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.red,
-                  border: InputBorder.none,
-                ),
+            flex: 4,
+            child: TextField(
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 1,
+                  ),
+              controller: _controller,
+              decoration: const InputDecoration(
+                // contentPadding: EdgeInsets.zero,
+                hintText: 'Type a message...',
+                isDense: false,
+                focusedBorder: InputBorder.none,
+                border: InputBorder.none,
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: Icon(
-              Icons.send
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(
+                style: ButtonStyle(
+                  shape: MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  backgroundColor: const MaterialStatePropertyAll(
+                    Color(0xffa7d2cb),
+                  ),
+                ),
+                onPressed: () {
+                  String message = _controller.text;
+                  _controller.clear();
+                  channel.sink.add(message);
+                },
+                icon: const Icon(
+                  Icons.send,
+                  size: 18,
+                ),
+              ),
             ),
           ),
         ],

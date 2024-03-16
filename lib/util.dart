@@ -14,8 +14,5 @@ const clntmsg = 'client';
 parseMessage(BuildContext context, String data) {
   Future.delayed(const Duration(seconds: 1));
   Message message = Message.fromJson(jsonDecode(data));
-  switch (message.type) {
-    case clntmsg:
-      context.read<MessageProvider>().addMessage(message);
-  }
+  context.read<MessageProvider>().addMessage(message);
 }
