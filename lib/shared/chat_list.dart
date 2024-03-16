@@ -23,7 +23,7 @@ class _ChatListState extends State<ChatList> {
           BuildContext context,
           int index
         ) {
-          return ChatChip(text: messages[index].body, from: messages[index].from.username);
+          return ChatChip(message: messages[index],);
         }
       ),
     );

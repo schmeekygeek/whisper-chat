@@ -47,13 +47,13 @@ class _CruiseState extends State<Cruise> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.hasData) {
                   parseMessage(context, snapshot.data);
                 }
                 return const ChatList();
               },
             ),
-            const ChatTextBox(),
+            ChatTextBox(channel: _channel),
           ],
         ),
       ),
