@@ -36,9 +36,6 @@ class _CruiseState extends State<Cruise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Test'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(

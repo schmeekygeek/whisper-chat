@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/providers/message_provider.dart';
 
+import 'providers/message_provider.dart';
 import 'classes/message.dart';
 
 const cnnctmsg = 'connected';
@@ -16,3 +16,5 @@ parseMessage(BuildContext context, String data) {
   Message message = Message.fromJson(jsonDecode(data));
   context.read<MessageProvider>().addMessage(message);
 }
+
+

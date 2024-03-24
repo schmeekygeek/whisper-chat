@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:whisper_chat/pages/takeoff.dart';
 
 import 'providers/message_provider.dart';
 import 'classes/client.dart';
 import 'classes/location.dart';
 import 'classes/message.dart';
-import 'pages/cruise.dart';
 import 'util.dart';
 
 void main() {
@@ -38,9 +38,7 @@ class WhisperChat extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: Cruise(
-        message: message,
-      ),
+      home: const Takeoff(),
     );
   }
 }
