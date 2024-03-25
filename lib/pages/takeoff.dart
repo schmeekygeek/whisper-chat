@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:whisper_chat/shared/dialogs.dart';
+import 'package:whisper_chat/util.dart';
 
 class Takeoff extends StatefulWidget {
   const Takeoff({
@@ -10,11 +13,6 @@ class Takeoff extends StatefulWidget {
 }
 
 class _TakeoffState extends State<Takeoff> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   late String _username;
 
@@ -50,6 +48,21 @@ class _TakeoffState extends State<Takeoff> {
                 return null;
               },
             ),
+            TextButton.icon(
+              label: const Text('Go'),
+              onPressed: () async {
+                Position position;
+                try {
+                  position = await determinePosition();
+                  print(position.latitude);
+                  print(position.longitude);
+                } catch (e) {
+                  if (!context.mounted) return;
+                  showTraceDialog(context, Exception(e));
+                }
+              },
+              icon: const Icon(Icons.send)
+            )
           ],
         ),
       ),
