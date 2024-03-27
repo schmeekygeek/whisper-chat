@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:whisper_chat/providers/message_provider.dart';
-import 'package:whisper_chat/shared/chat_list.dart';
-import 'package:whisper_chat/shared/chat_textbox.dart';
 
+import '../providers/message_provider.dart';
+import '../shared/chat_list.dart';
+import '../shared/chat_textbox.dart';
 import '../classes/message.dart';
 import '../util.dart';
 
