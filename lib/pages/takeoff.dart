@@ -28,7 +28,7 @@ class _TakeoffState extends State<Takeoff> {
               autofillHints: const [
                 AutofillHints.username,
               ],
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.text,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               onChanged: (value) => _username = value,
               decoration: const InputDecoration(
@@ -41,7 +41,7 @@ class _TakeoffState extends State<Takeoff> {
                     size: 19,
                   ),
                 ),
-                hintText: 'Email',
+                hintText: 'Username',
               ),
               style: Theme.of(context).textTheme.bodyMedium,
               obscureText: false,
