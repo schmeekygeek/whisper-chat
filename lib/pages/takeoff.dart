@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:whisper_chat/shared/dialogs.dart';
-import 'package:whisper_chat/util.dart';
+
+import '../shared/dialogs.dart';
+import '../util.dart';
 
 class Takeoff extends StatefulWidget {
   const Takeoff({
