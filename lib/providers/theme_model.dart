@@ -48,13 +48,6 @@ class ThemeModel with ChangeNotifier {
         selectedItemColor: White.base,
       ),
       textTheme: const TextTheme(
-        bodySmall: TextStyle(
-          fontSize: 18,
-          letterSpacing: 1,
-          fontFamily: 'Satoshi',
-          color: Dark.text,
-          fontWeight: FontWeight.w100,
-        ),
         headlineMedium: TextStyle(
           fontSize: 38,
           fontFamily: 'Staatliches',
