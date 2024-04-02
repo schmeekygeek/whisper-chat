@@ -23,7 +23,8 @@ class _CruiseState extends State<Cruise> {
   final TextEditingController _controller = TextEditingController();
 
   final _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8080'),
+    // Uri.parse('ws://localhost:8080'),
+    Uri.parse('wss://topical-slightly-weevil.ngrok-free.app'),
   );
 
   @override
