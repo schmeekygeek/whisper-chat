@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/pages/takeoff.dart';
 
+import 'pages/cruise.dart';
+import 'pages/takeoff.dart';
+import 'providers/theme_model.dart';
 import 'providers/message_provider.dart';
 import 'classes/client.dart';
 import 'classes/location.dart';
 import 'classes/message.dart';
 import 'util.dart';
 
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+        ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
+
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     MultiProvider(
       providers: [
@@ -37,8 +49,10 @@ class WhisperChat extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: const Takeoff(),
+      theme: ThemeModel.buildDarkTheme(),
+      home: Cruise(
+        message: WhisperChat.message
+      ),
     );
   }
 }
