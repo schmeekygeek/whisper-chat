@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/providers/message_provider.dart';
 
+import '../providers/message_provider.dart';
+import '../providers/theme_model.dart';
 import '../classes/message.dart';
 import '../util.dart';
 
@@ -18,7 +19,13 @@ class ChatChip extends StatelessWidget {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('${message.from.username} ${message.type}'),
+          child: Text(
+            '${message.from.username} ${message.type}',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 15,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
         ),
       );
     }
@@ -31,7 +38,7 @@ class ChatChip extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width * 70/100,
           ),
           decoration: BoxDecoration(
-            color: isSelf ? Colors.greenAccent : Colors.grey,
+            color: isSelf ? Dark.blue : Dark.text,
             borderRadius: BorderRadius.only(
               topLeft: isSelf ? const Radius.circular(15) : const Radius.circular(0),
               topRight: !isSelf ? const Radius.circular(15) : const Radius.circular(0),
@@ -41,7 +48,14 @@ class ChatChip extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(message.body),
+            child: Text(
+              message.body,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Dark.crust,
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
           ),
         ),
       ),
