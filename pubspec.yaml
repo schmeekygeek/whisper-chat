@@ -36,6 +36,7 @@ dependencies:
   geolocator: ^11.0.0
   geolocator_linux: ^0.2.0+1
   geolocator_android: ^4.5.4
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: fonts/Satoshi-Medium.otf
+        - asset: fonts/Satoshi-Regular.otf
+        - asset: fonts/Satoshi-Bold.otf
+    - family: LobsterTwo
+      fonts:
+        - asset: fonts/LobsterTwo-Regular.ttf
+    - family: Staatliches
+      fonts:
+        - asset: fonts/Staatliches-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
