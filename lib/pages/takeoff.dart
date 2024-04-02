@@ -1,6 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:provider/provider.dart';
 import 'package:whisper_chat/providers/theme_model.dart';
 
 import '../shared/dialogs.dart';
@@ -17,7 +17,7 @@ class Takeoff extends StatefulWidget {
 
 class _TakeoffState extends State<Takeoff> {
 
-  late String _username;
+  String _username = '';
   int _range = 0;
 
   @override
@@ -25,82 +25,153 @@ class _TakeoffState extends State<Takeoff> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: Column(
+        child: ListView(
           children: [
-            Expanded(
-              flex: 4,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'WHISPER\nCHAT',
-                  style: Theme.of(context).textTheme.headlineMedium,
+            const SizedBox(
+              height: 40,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Whisper\nChat',
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  fontFamily: 'LobsterTwo',
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: TextFormField(
-                autofillHints: const [
-                  AutofillHints.username,
-                ],
-                keyboardType: TextInputType.text,
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                onChanged: (value) => _username = value,
-                decoration: const InputDecoration(
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(
-                      right: 15,
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      size: 19,
-                    ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: AnimatedTextKit(
+                displayFullTextOnTap: true,
+                pause: const Duration(milliseconds: 1500),
+                repeatForever: true,
+                animatedTexts: [
+                  TyperAnimatedText(
+                    'Anonymous.',
                   ),
-                  hintText: 'Username',
+                  TyperAnimatedText(
+                    'Safe.',
+                  ),
+                  TyperAnimatedText(
+                    'Easy.',
+                  ),
+                  TyperAnimatedText(
+                    'Fast.',
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            const Text(
+              'Let\'s get to know you',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontFamily: 'Staatliches',
+                fontSize: 20,
+                letterSpacing: 3,
+                color: Colors.blueGrey,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              autofillHints: const [
+                AutofillHints.username,
+              ],
+              keyboardType: TextInputType.text,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
+              onChanged: (value) => _username = value,
+              decoration: const InputDecoration(
+                suffixIcon: Padding(
+                  padding: EdgeInsets.only(
+                    right: 15,
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: 19,
+                  ),
                 ),
-                style: Theme.of(context).textTheme.bodyMedium,
-                obscureText: false,
-                validator: (value) {
-                  return null;
-                },
+                hintText: 'Username',
+              ),
+              style: Theme.of(context).textTheme.bodyMedium,
+              obscureText: false,
+              validator: (value) {
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'What range would you like?',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontFamily: 'Staatliches',
+                fontSize: 20,
+                letterSpacing: 3,
+                color: Colors.blueGrey,
               ),
             ),
-            Expanded(
-              child: DropdownButton(
-                hint: Text('$_range'),
-                items: const [
-                  DropdownMenuItem(
-                    value: 10,
-                    child: Text('10'),
-                  ),
-                  DropdownMenuItem(
-                    value: 50,
-                    child: Text('50'),
-                  ),
-                  DropdownMenuItem(
-                    value: 100,
-                    child: Text('100'),
-                  ),
-                ],
-                onChanged: (value) => _range = value!,
+            DropdownButton(
+              elevation: 3,
+              hint: const Text('in KMs'),
+              underline: const SizedBox(),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8),
               ),
+              padding: const EdgeInsets.all(4),
+              items: const [
+                DropdownMenuItem(
+                  value: 10,
+                  child: Text('10'),
+                ),
+                DropdownMenuItem(
+                  value: 50,
+                  child: Text('50'),
+                ),
+                DropdownMenuItem(
+                  value: 100,
+                  child: Text('100'),
+                ),
+                DropdownMenuItem(
+                  value: 500,
+                  child: Text('500'),
+                ),
+              ],
+              onChanged: (value) => _range = value!,
             ),
-            Expanded(
-              flex: 2,
-              child: TextButton.icon(
-                label: const Text('Go'),
-                onPressed: () async {
-                  Position position;
-                  try {
-                    position = await determinePosition();
-                    print(position.latitude);
-                    print(position.longitude);
-                  } catch (e) {
-                    if (!context.mounted) return;
-                    showTraceDialog(context, Exception(e));
-                  }
-                },
-                icon: const Icon(Icons.send)
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton.icon(
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Dark.blue),
+              ),
+              icon: const Text(
+                'LET\'S GO',
+                style: TextStyle(
+                  color: Dark.crust,
+                  fontFamily: 'Staatliches',
+                  fontSize: 22,
+                ),
+              ),
+              onPressed: () async {
+                Position position;
+                try {
+                  position = await determinePosition();
+                  print(position.latitude);
+                  print(position.longitude);
+                } catch (e) {
+                  if (!context.mounted) return;
+                  showErrorDialog(context, e.toString());
+                }
+              },
+              label: const Icon(
+                Icons.send,
+                color: Dark.crust,
               ),
             ),
           ],
