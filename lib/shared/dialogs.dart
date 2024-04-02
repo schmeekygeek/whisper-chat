@@ -28,27 +28,23 @@ showErrorDialog(BuildContext context, String message) {
         ),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: SizedBox(
-            child: Column(
-              children: [
-                const Expanded(
-                  flex: 2,
-                  child: Icon(
-                    Icons.error,
-                    color: Colors.red,
-                    size: 35,
-                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.error,
+                color: Colors.red,
+                size: 35,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
