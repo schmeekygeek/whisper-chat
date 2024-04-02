@@ -64,6 +64,7 @@ class ChatTextBox extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.send,
+                  color: Colors.black,
                   size: 18,
                 ),
               ),
