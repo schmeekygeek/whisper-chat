@@ -2,6 +2,12 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:whisper_chat/classes/client.dart';
+import 'package:whisper_chat/classes/location.dart';
+import 'package:whisper_chat/classes/message.dart';
+import 'package:whisper_chat/extensions.dart';
+import 'package:whisper_chat/pages/loading_page.dart';
+import 'package:whisper_chat/shared/loading_dialog.dart';
 
 import '../providers/misc_provider.dart';
 import '../providers/theme_model.dart';
@@ -20,7 +26,6 @@ class Takeoff extends StatefulWidget {
 class _TakeoffState extends State<Takeoff> {
 
   String _username = '';
-  int _range = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -163,11 +168,28 @@ class _TakeoffState extends State<Takeoff> {
               onPressed: () async {
                 Position position;
                 try {
+                  showLoadingDialog(context);
                   position = await determinePosition();
+                  if (!context.mounted) return;
+                  context.pop();
                   print(position.latitude);
                   print(position.longitude);
+                  context.push(
+                    LoadingPage(
+                      message: Message(
+                        type: bindmsg,
+                        from: Client(
+                          username: _username,
+                          location: Location(lat: position.latitude, long: position.longitude),
+                          range: context.read<MiscProvider>().getRange
+                        ),
+                        body: ''
+                      )
+                    )
+                  );
                 } catch (e) {
                   if (!context.mounted) return;
+                  context.pop();
                   showErrorDialog(context, e.toString());
                 }
               },

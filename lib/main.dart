@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:whisper_chat/providers/misc_provider.dart';
 
-import 'pages/cruise.dart';
 import 'pages/takeoff.dart';
 import 'providers/theme_model.dart';
 import 'providers/message_provider.dart';
@@ -25,6 +25,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MessageProvider()),
+        ChangeNotifierProvider(create: (_) => MiscProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeModel()),
       ],
       child: const WhisperChat(),
     ),
@@ -50,9 +52,7 @@ class WhisperChat extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeModel.buildDarkTheme(),
-      home: Cruise(
-        message: WhisperChat.message
-      ),
+      home: const Takeoff(),
     );
   }
 }

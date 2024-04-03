@@ -1,6 +1,6 @@
 class Location {
-  int lat;
-  int long;
+  double lat;
+  double long;
 
   Location({
     required this.lat, required this.long
@@ -11,8 +11,8 @@ class Location {
 }
 
 Location _$LocationFromJson(Map<String, dynamic> json) => Location(
-  lat: json['lat'] as int,
-  long: json['long'] as int,
+  lat: json['lat'] as double,
+  long: json['long'] as double,
 );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{

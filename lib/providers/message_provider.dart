@@ -3,7 +3,7 @@ import '../classes/message.dart';
 
 class MessageProvider with ChangeNotifier {
 
-  final List<Message> _messages = [];
+  List<Message> _messages = [];
   String _selfUsername = '';
 
   List<Message> get getMessages => _messages;
@@ -19,5 +19,9 @@ class MessageProvider with ChangeNotifier {
       const Duration(seconds: 1),
       () => notifyListeners(),
     );
+  }
+
+  void deleteAllMessages() {
+    _messages = [];
   }
 }
