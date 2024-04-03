@@ -2,17 +2,17 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:whisper_chat/classes/client.dart';
-import 'package:whisper_chat/classes/location.dart';
-import 'package:whisper_chat/classes/message.dart';
-import 'package:whisper_chat/extensions.dart';
-import 'package:whisper_chat/pages/loading_page.dart';
-import 'package:whisper_chat/shared/loading_dialog.dart';
 
+import '../classes/client.dart';
+import '../classes/location.dart';
+import '../classes/message.dart';
+import '../extensions.dart';
+import '../shared/loading_dialog.dart';
 import '../providers/misc_provider.dart';
 import '../providers/theme_model.dart';
 import '../shared/dialogs.dart';
 import '../util.dart';
+import 'cruise.dart';
 
 class Takeoff extends StatefulWidget {
   const Takeoff({
@@ -172,8 +172,6 @@ class _TakeoffState extends State<Takeoff> {
                   position = await determinePosition();
                   if (!context.mounted) return;
                   context.pop();
-                  print(position.latitude);
-                  print(position.longitude);
                   context.push(
                     LoadingPage(
                       message: Message(
