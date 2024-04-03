@@ -1,8 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:whisper_chat/providers/theme_model.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/misc_provider.dart';
+import '../providers/theme_model.dart';
 import '../shared/dialogs.dart';
 import '../util.dart';
 
@@ -117,7 +119,7 @@ class _TakeoffState extends State<Takeoff> {
             ),
             DropdownButton(
               elevation: 3,
-              hint: const Text('in KMs'),
+              hint: Text('${context.watch<MiscProvider>().getRange} kms'),
               underline: const SizedBox(),
               borderRadius: const BorderRadius.all(
                 Radius.circular(8),
@@ -126,22 +128,22 @@ class _TakeoffState extends State<Takeoff> {
               items: const [
                 DropdownMenuItem(
                   value: 10,
-                  child: Text('10'),
+                  child: Text('10 kms'),
                 ),
                 DropdownMenuItem(
                   value: 50,
-                  child: Text('50'),
+                  child: Text('50 kms'),
                 ),
                 DropdownMenuItem(
                   value: 100,
-                  child: Text('100'),
+                  child: Text('100 kms'),
                 ),
                 DropdownMenuItem(
                   value: 500,
-                  child: Text('500'),
+                  child: Text('500 kms'),
                 ),
               ],
-              onChanged: (value) => _range = value!,
+              onChanged: (value) => context.read<MiscProvider>().setRange(value ?? 0),
             ),
             const SizedBox(
               height: 20,
