@@ -19,6 +19,8 @@ class Cruise extends StatefulWidget {
 
 class _CruiseState extends State<Cruise> {
 
+  final _scrollController = ScrollController();
+
   final _channel = WebSocketChannel.connect(
     // Uri.parse('ws://localhost:8080'),
     Uri.parse('wss://topical-slightly-weevil.ngrok-free.app'),
@@ -34,6 +36,7 @@ class _CruiseState extends State<Cruise> {
   @override
   void dispose() {
     _channel.sink.close();
+    _scrollController.dispose();
     context.read<MessageProvider>().deleteAllMessages();
     super.dispose();
   }
@@ -59,9 +62,16 @@ class _CruiseState extends State<Cruise> {
                     Builder(
                       builder: (context) {
                         if (snapshot.hasData) {
+                          if (_scrollController.hasClients) {
+                            _scrollController.animateTo(
+                              _scrollController.position.maxScrollExtent * 2,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.fastLinearToSlowEaseIn
+                            );
+                          }
                           parseMessage(context, snapshot.data);
                         }
-                        return const ChatList();
+                        return ChatList(scrollController: _scrollController,);
                       },
                     ),
                     ChatTextBox(channel: _channel),

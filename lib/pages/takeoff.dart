@@ -7,7 +7,6 @@ import '../classes/client.dart';
 import '../classes/location.dart';
 import '../classes/message.dart';
 import '../extensions.dart';
-import '../shared/loading_dialog.dart';
 import '../providers/misc_provider.dart';
 import '../providers/theme_model.dart';
 import '../shared/dialogs.dart';
@@ -24,6 +23,12 @@ class Takeoff extends StatefulWidget {
 }
 
 class _TakeoffState extends State<Takeoff> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   String _username = '';
 
