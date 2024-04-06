@@ -173,7 +173,7 @@ class _TakeoffState extends State<Takeoff> {
                   if (!context.mounted) return;
                   context.pop();
                   context.push(
-                    LoadingPage(
+                    Cruise(
                       message: Message(
                         type: bindmsg,
                         from: Client(

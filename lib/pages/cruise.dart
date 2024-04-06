@@ -9,15 +9,15 @@ import '../shared/chat_textbox.dart';
 import '../shared/image_slider.dart';
 import '../util.dart';
 
-class LoadingPage extends StatefulWidget {
+class Cruise extends StatefulWidget {
   final Message message;
-  const LoadingPage({super.key, required this.message});
+  const Cruise({super.key, required this.message});
 
   @override
-  State<LoadingPage> createState() => _LoadingPageState();
+  State<Cruise> createState() => _CruiseState();
 }
 
-class _LoadingPageState extends State<LoadingPage> {
+class _CruiseState extends State<Cruise> {
 
   final _channel = WebSocketChannel.connect(
     // Uri.parse('ws://localhost:8080'),
