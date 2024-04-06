@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 showTraceDialog(BuildContext context, Exception exception) {
   showDialog(context: context, builder: (context) => Dialog(
@@ -49,5 +50,24 @@ showErrorDialog(BuildContext context, String message) {
         ),
       );
     },
+  );
+}
+
+showLoadingDialog(BuildContext context) {
+  showDialog(
+    builder: (context) => Dialog.fullscreen(
+      backgroundColor: Colors.transparent,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Center(
+          child: LottieBuilder.asset(
+            'assets/loading1.json',
+            height: 150,
+            frameRate: FrameRate.max,
+          ),
+        ),
+      ),
+    ),
+    context: context,
   );
 }
