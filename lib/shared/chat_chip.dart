@@ -48,13 +48,26 @@ class ChatChip extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(
-              message.body,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Dark.crust,
-                fontSize: 15,
-                fontWeight: FontWeight.w300,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message.body,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Dark.crust,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                Text(
+                  '${DateTime.now().hour}:${DateTime.now().minute}',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Dark.surface0,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

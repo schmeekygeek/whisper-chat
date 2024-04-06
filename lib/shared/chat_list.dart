@@ -6,7 +6,8 @@ import 'chat_chip.dart';
 import '../classes/message.dart';
 
 class ChatList extends StatefulWidget {
-  const ChatList({super.key});
+  final ScrollController scrollController;
+  const ChatList({super.key, required this.scrollController});
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -19,6 +20,7 @@ class _ChatListState extends State<ChatList> {
     return Expanded(
       child: ListView.builder(
         itemCount: messages.length,
+        controller: widget.scrollController,
         itemBuilder: (
           BuildContext context,
           int index
